@@ -1,0 +1,28 @@
+<p>rocket works!</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ROCKET ID</th>
+            <th>ROCKET NAME</th>
+            <th>ROCKET TYPE</th>
+            
+           
+            <!--th>CORE SERIAL</th>
+            <th>FLIGHT</th>
+            <th>BLOCK</th>
+            <th>LAND SUCCESS</th>
+            <th>LANDING INTENT</th>
+            <th>LANDING TYPE</th>
+            <th>LANDING VEHICLE</th-->
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{launch.rocket.rocket_id}}</td>
+            <td>{{launch.rocket.rocket_name}}</td>
+            <td>{{launch.rocket.rocket_type}}</td>
+           
+        </tr>
+    </tbody>
+</table>
+<button [routerLink] = "['/firststage', launch.flight_number]" >VIEW FIRST STAGE</button>

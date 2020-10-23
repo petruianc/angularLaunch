@@ -1,0 +1,31 @@
+<p>launches works!</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>FLIGHT NUMBER</th>
+            <th>MISSION NAME</th>
+            <th>MISSION ID</th>
+            <th>LAUNCH YEAR</th>
+            <th>LAUNCH DATE_UTC</th>
+            <th>LAUNCH WINDOW</th>
+            <th>ROCKET</th>
+            <th>LINKS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let launch of launches">
+            <td>{{launch.flight_number}}</td>
+            <td>{{launch.mission_name}}</td>
+            <td>{{launch.mission_id}}</td>
+            <td>{{launch.launch_year}}</td>
+            <td>{{launch.launch_date_utc}}</td>
+            <td>{{launch.launch_window}}</td>
+            <td><a [routerLink]="['/rocket', launch.flight_number]">Rocket</a></td>
+            <td><a [routerLink]="['/links', launch.flight_number]">links</a></td>
+
+            
+                
+            
+        </tr>
+    </tbody>
+</table>
