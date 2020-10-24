@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LaunchServiceService } from '../launch-service.service';
 import { Launch } from '../model/launch';
 
@@ -9,14 +10,17 @@ import { Launch } from '../model/launch';
   templateUrl: './launches.component.html',
   styleUrls: ['./launches.component.css']
 })
-export class LaunchesComponent implements OnInit {
+export class LaunchesComponent implements OnInit, OnDestroy {
 
   constructor(private launchService:LaunchServiceService, private router: Router) { }
+ 
   
   public launches : Launch[] = null;
   
+  subLaunches : Subscription;
+
   ngOnInit(): void {
-    this.launchService.getLaunches().subscribe(
+    this.subLaunches = this.launchService.getLaunches().subscribe(
       rez=>
       {
         this.launches = rez
@@ -26,5 +30,7 @@ export class LaunchesComponent implements OnInit {
         console.log(err);
       });
   }
-
+  ngOnDestroy(): void {
+    this.subLaunches.unsubscribe();
+  }
 }

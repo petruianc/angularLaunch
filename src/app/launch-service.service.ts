@@ -10,9 +10,13 @@ export class LaunchServiceService {
 
   constructor(private httpClient:HttpClient) { }
 
-  private _url:string = 'https://api.spacexdata.com/v3/launches';
+  private readonly _url:string = 'https://api.spacexdata.com/v3/launches';
 
   getLaunches(): Observable<Launch[]>{
     return this.httpClient.get<Launch[]>(this._url);
+  }
+
+  getLaunchById(flightNumber : Number) : Observable<Launch>{
+    return this.httpClient.get<Launch>(`${this._url}/${flightNumber}`)
   }
 }

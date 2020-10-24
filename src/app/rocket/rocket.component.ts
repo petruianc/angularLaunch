@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LaunchServiceService } from '../launch-service.service';
 import { Launch } from '../model/launch';
 import { Rocket } from '../model/Rocket';
@@ -10,17 +11,18 @@ import { Rocket } from '../model/Rocket';
   templateUrl: './rocket.component.html',
   styleUrls: ['./rocket.component.css']
 })
-export class RocketComponent implements OnInit {
+export class RocketComponent implements OnInit, OnDestroy {
 
   flight_number:Number; 
 
 
-  constructor(private ar : ActivatedRoute, private httpClient : HttpClient, private router:Router) { }
+  constructor(private ar : ActivatedRoute, private httpClient : HttpClient, private router:Router, private launchService : LaunchServiceService) { }
+  
   
   launch:Launch = null;
   
   
-  
+  subLaunch : Subscription;
   
   ngOnInit(): void {
     this.ar.params.subscribe(
@@ -29,7 +31,7 @@ export class RocketComponent implements OnInit {
       }
     );
 
-    this.httpClient.get<Launch>(`https://api.spacexdata.com/v3/launches/${this.flight_number}`).subscribe(
+    this.subLaunch = this.launchService.getLaunchById(this.flight_number).subscribe(
       rez=>{
         this.launch = rez;
       }
@@ -39,5 +41,7 @@ export class RocketComponent implements OnInit {
   viewFirstStage(){
     
   }
-
+  ngOnDestroy(): void {
+   this.subLaunch.unsubscribe();
+  }
 }
