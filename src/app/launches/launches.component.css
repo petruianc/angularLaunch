@@ -1,0 +1,25 @@
+table{
+    min-width: 99%;
+}
+
+table tr{
+    text-align: center;
+}
+
+table tr th {
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+    
+}
+
+table tr th.small-th{
+    padding: 0px 3px 0px 3px;
+}
+
+table tr td{
+    border-right: 1px solid #e0e0e0;
+}
+
+table tr td.small-td{
+    padding: 0px 3px 0px 3px;
+}

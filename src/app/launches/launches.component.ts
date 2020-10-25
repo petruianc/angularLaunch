@@ -18,6 +18,7 @@ export class LaunchesComponent implements OnInit, OnDestroy {
   public launches : Launch[] = null;
   
   subLaunches : Subscription;
+  displayedColumns: string[] = ['flightNumber', 'missionName', 'missionId', 'launchYear', 'launchDate', 'launchWindow', 'rocket', 'link'];
 
   ngOnInit(): void {
     this.subLaunches = this.launchService.getLaunches().subscribe(
